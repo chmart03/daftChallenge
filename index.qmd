@@ -32,7 +32,7 @@ First, let's install the DAFT package and set up our environment:
 
 ```{python}
 #| label: setup-environment
-#| echo: true
+#| echo: false
 #| message: false
 #| warning: false
 
@@ -77,7 +77,7 @@ print("Ready to create beautiful DAGs!")
 
 ```{python}
 #| label: dag-1-1747
-#| echo: true
+#| echo: false
 #| fig-cap: "1747 Understanding: Lemons prevent scurvy (correct but incomplete)"
 
 import daft
@@ -112,7 +112,7 @@ pgm.render()
 
 ```{python}
 #| label: dag-2-misguided
-#| echo: true
+#| echo: false
 #| fig-cap: "Misguided Belief: Acid kills bacteria (wrong understanding)"
 
 import daft
@@ -120,7 +120,7 @@ import matplotlib.pyplot as plt
 
 pgm = daft.PGM(dpi=150, alternate_style="outer")
 
-pgm.add_node("acid", "Acid" + r" $(X)$", 1, 2, aspect=3, scale=1.1,
+pgm.add_node("acid", "Acid" + r" $(X)$", 1, 2.5, aspect=3, scale=1.1,
              plot_params={
                  'facecolor': 'lightcoral', 
                  'edgecolor': 'darkred', 
@@ -136,7 +136,7 @@ pgm.add_node("bacteria_death", "Bacteria\nDeath" + r" $(Z)$", 3, 2, aspect=3, sc
                  'alpha': 0.8,
              })
 
-pgm.add_node("scurvy_prevention", "Scurvy\nPrevention" + r" $(Y)$", 5, 2, aspect=3, scale=1.1,
+pgm.add_node("scurvy_prevention", "Scurvy\nPrevention" + r" $(Y)$", 5, 1.5, aspect=3, scale=1.1,
              plot_params={
                  'facecolor': 'lightgreen', 
                  'edgecolor': 'darkgreen', 
@@ -156,7 +156,7 @@ pgm.render()
 
 ```{python}
 #| label: dag-3-1928
-#| echo: true
+#| echo: false
 #| fig-cap: "1928 Understanding: Vitamin C prevents scurvy (complete and correct)"
 
 import daft
@@ -164,7 +164,7 @@ import matplotlib.pyplot as plt
 
 pgm = daft.PGM(dpi=150, alternate_style="outer")
 
-pgm.add_node("vitamin_c", "Vitamin C\n(Ascorbic Acid)" + r" $(X)$", 1, 2, aspect=3, scale=1.1, fontsize=8,
+pgm.add_node("vitamin_c", "Vitamin C\n(Ascorbic Acid)" + r" $(X)$", 1, 2.5, aspect=3, scale=1.1, fontsize=8,
              plot_params={
                  'facecolor': 'lightblue', 
                  'edgecolor': 'darkblue', 
@@ -172,7 +172,15 @@ pgm.add_node("vitamin_c", "Vitamin C\n(Ascorbic Acid)" + r" $(X)$", 1, 2, aspect
                  'alpha': 0.8,
              })
 
-pgm.add_node("scurvy_prevention", "Scurvy\nPrevention" + r" $(Y)$", 3.25, 2, aspect=3, scale=1.1,
+pgm.add_node("collagen_synthesis", "Collagen\nSynthesis" + r" $(Z)$", 3, 2, aspect=3, scale=1.1,
+             plot_params={
+                 'facecolor': 'lightcyan', 
+                 'edgecolor': 'teal', 
+                 'linewidth': 2,
+                 'alpha': 0.8,
+             })
+
+pgm.add_node("scurvy_prevention", "Scurvy\nPrevention" + r" $(Y)$", 5, 1.5, aspect=3, scale=1.1,
              plot_params={
                  'facecolor': 'lightgreen', 
                  'edgecolor': 'darkgreen', 
@@ -180,7 +188,8 @@ pgm.add_node("scurvy_prevention", "Scurvy\nPrevention" + r" $(Y)$", 3.25, 2, asp
                  'alpha': 0.8,
              })
 
-pgm.add_edge("vitamin_c", "scurvy_prevention")
+pgm.add_edge("vitamin_c", "collagen_synthesis")
+pgm.add_edge("collagen_synthesis", "scurvy_prevention")
 
 pgm.render()
 ```
